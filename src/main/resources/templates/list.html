@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Studentlist</title>
+    <title>Booklist</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -21,10 +21,12 @@
 				<td th:text="${book.isbn}"></td>
 				<td th:text="${book.publicationYear}"></td>
 				<td> <a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+				<td> <a th:href="@{/edit(id=${book.id})}">Edit</a></td>
+				
 			</tr>
 		</tbody>
 	</table>
-	<a href="/add"> Add Book</a>
+	<a href="/add">Add Book</a>
 </body>
 
 </html>
