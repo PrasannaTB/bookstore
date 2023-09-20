@@ -16,6 +16,9 @@ public class BookController {
 	@Autowired
 	private BookRepository repository;
 
+	@Autowired
+	private CategoryRepository crepository;
+
 	@RequestMapping("/booklist")
 	public String bookList(Model model) {
 
@@ -33,6 +36,7 @@ public class BookController {
 	@RequestMapping(value = "/add")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("category", crepository.findAll());
 		return "addbook";
 	}
 
@@ -47,6 +51,9 @@ public class BookController {
 		Book book = repository.findById(id).orElse(null);
 		if (book != null) {
 			model.addAttribute("book", book);
+			model.addAttribute("category", crepository.findAll());
+			
+
 			return "editbook";
 		} else {
 			// Handle the case where the book with the given ID doesn't exist
@@ -61,7 +68,12 @@ public class BookController {
 		repository.save(editedBook);
 		return "redirect:/booklist";
 	}
-
-	
+	/*
+	 * 
+	 * @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET) public
+	 * String editBook(@PathVariable("id") Long id, Model model) {
+	 * model.addAttribute("book", repository.findById(id));
+	 * model.addAttribute("category", crepository.findAll()); return "editbook"; }
+	 */
 
 }
