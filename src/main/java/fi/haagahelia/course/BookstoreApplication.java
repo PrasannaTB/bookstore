@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import fi.haagahelia.course.domain.AppUser;
+import fi.haagahelia.course.domain.AppUserRepository;
 import fi.haagahelia.course.domain.Book;
 import fi.haagahelia.course.domain.BookRepository;
 import fi.haagahelia.course.domain.Category;
@@ -22,7 +24,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository crepository) {
+	public CommandLineRunner bookDemo(BookRepository repository, CategoryRepository crepository, AppUserRepository urepository) {
 		return (args) -> {
 			log.info("save a couple of books");
 
@@ -37,6 +39,12 @@ public class BookstoreApplication {
 					crepository.findByName("Young-Adult").get(0)));
 			repository.save(
 					new Book("John Green", "536526", "Paper Towns", "2017", crepository.findByName("Romance").get(0)));
+
+			// Create users: admin/admin user/user
+			AppUser user1 = new AppUser("user", "$2a$10$KVK1CB0bzjnxo42BQ3y1nOha7LJLIRTWS5MTtXVJqKGWidpNcda3K", "user@gamil.com", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$7YaKrVaSJZR2ML5J.cJx3.GPlubIcM6vpdGCOSZ18T1fdHNUumNFS", "admin@gmail.com", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
 
 			log.info("fetch all students");
 			for (Book book : repository.findAll()) {
