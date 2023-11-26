@@ -23,9 +23,8 @@ public class BookController {
 
 	@Autowired
 	private CategoryRepository crepository;
-	
-	// Show all students
-	@RequestMapping(value="/login")
+
+	@RequestMapping(value = "/login")
 	public String login() {
 		return "login";
 	}
@@ -38,18 +37,18 @@ public class BookController {
 
 		return "list";
 	}
-	
+
 	// RESTful service to get all books
-	@RequestMapping(value="/books", method = RequestMethod.GET)
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public @ResponseBody List<Book> bookListRest() {
 		return (List<Book>) repository.findAll();
 	}
-	
+
 	// RESTful service to get book by id
-	@RequestMapping(value="/book/{id}", method = RequestMethod.GET)
-    public @ResponseBody Optional<Book> findBooktRest(@PathVariable("id") Long id) {	
-    	return repository.findById(id);
-    } 
+	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Book> findBooktRest(@PathVariable("id") Long id) {
+		return repository.findById(id);
+	}
 
 	// Delete student
 	@PreAuthorize("hasAuthority('ADMIN')")
@@ -75,14 +74,13 @@ public class BookController {
 		return "redirect:booklist";
 	}
 
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/edit")
 	public String editBook(Long id, Model model) {
 		Book book = repository.findById(id).orElse(null);
 		if (book != null) {
 			model.addAttribute("book", book);
 			model.addAttribute("category", crepository.findAll());
-			
+
 			return "editbook";
 		} else {
 			// Handle the case where the book with the given ID doesn't exist
@@ -97,6 +95,7 @@ public class BookController {
 		repository.save(editedBook);
 		return "redirect:/booklist";
 	}
+
 	/*
 	 * 
 	 * @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET) public

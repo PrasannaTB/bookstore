@@ -37,16 +37,16 @@ public class BookstoreApplication {
 					crepository.findByName("Fantasy").get(0)));
 			repository.save(new Book("Gary D.", "236547", "Orbiting Jupiter", "2015",
 					crepository.findByName("Young-Adult").get(0)));
-			repository.save(
-					new Book("John Green", "536526", "Paper Towns", "2017", crepository.findByName("Romance").get(0)));
+			repository.save(new Book("John Green", "536526", "Paper Towns", "2017", 
+					crepository.findByName("Romance").get(0)));
 
 			// Create users: admin/admin user/user
 			AppUser user1 = new AppUser("user", "$2a$10$KVK1CB0bzjnxo42BQ3y1nOha7LJLIRTWS5MTtXVJqKGWidpNcda3K", "user@gamil.com", "USER");
 			AppUser user2 = new AppUser("admin", "$2a$10$7YaKrVaSJZR2ML5J.cJx3.GPlubIcM6vpdGCOSZ18T1fdHNUumNFS", "admin@gmail.com", "ADMIN");
-			urepository.save(user1);
-			urepository.save(user2);
+			//urepository.save(user1);
+			//urepository.save(user2);
 
-			log.info("fetch all students");
+			log.info("fetch all books");
 			for (Book book : repository.findAll()) {
 				log.info(book.toString());
 			}

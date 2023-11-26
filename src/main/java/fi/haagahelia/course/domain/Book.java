@@ -1,6 +1,5 @@
 package fi.haagahelia.course.domain;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
